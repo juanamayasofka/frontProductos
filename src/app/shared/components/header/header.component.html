@@ -1,5 +1,6 @@
-<mat-toolbar>
-  <span> Tienda zona talet </span>
+<mat-toolbar color="primary">
+  <a [routerLink]="['/']"><span> Tienda zona talet </span></a>
+  
   <span class="spaceer"></span>
-  <app-car></app-car>
+  <app-car class="mouseHover" (click)="goToCheckout()"></app-car>
 </mat-toolbar>

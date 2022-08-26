@@ -1,0 +1,42 @@
+
+.container {
+   margin: 6rem auto 0;
+   width: 90%;
+}
+
+.item {
+    flex: 1 1 auto;
+}
+
+.mat-radio-group {
+    display: block;
+}
+
+.mat-radio-button {
+    margin-right: 1rems;
+}
+
+button {
+
+    width: 100%;
+}
+
+.form__element {
+    padding: 5px 0px 25px 2px;
+    width: 50%;
+    margin-bottom: .5rem;
+}
+
+.container__button {
+    margin: 0 auto;
+    display: block;
+    width: 20%;
+    margin-top: 4rem;
+}
+
+.actions {
+    margin: 0 auto;
+    display: block;
+    width: 40%;
+    margin: 4rem auto 0;
+}

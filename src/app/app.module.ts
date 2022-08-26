@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CarComponent } from './shared/components/car/car.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { CarComponent } from './shared/components/car/car.component';
     MaterialModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

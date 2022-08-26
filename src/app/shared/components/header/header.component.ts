@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShoppingCartService } from './services/shopping-cart.service';
 
 @Component({
@@ -8,5 +9,9 @@ import { ShoppingCartService } from './services/shopping-cart.service';
 })
 export class HeaderComponent  {
 
+  constructor(private router: Router){}
   
+  goToCheckout(): void {
+    this.router.navigate(['/checkout']);
+  }
 }
