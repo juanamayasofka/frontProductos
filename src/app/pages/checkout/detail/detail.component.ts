@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from 'src/app/shared/components/header/services/shopping-cart.service';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  total$ = this.shoppingCarSvc.totalAction$;
+  car$ = this.shoppingCarSvc.carAction$;
+
+  constructor(private shoppingCarSvc: ShoppingCartService) { }
 
   ngOnInit(): void {
   }
 
+
+ 
 }

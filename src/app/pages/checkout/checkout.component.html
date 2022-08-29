@@ -1,7 +1,7 @@
 
 <div class="container">
 
-    <form class="form item">
+    <form class="form item"  #checkoutForm="ngForm">
         <mat-form-field class="form__element">
             <input 
                 matInput
@@ -21,29 +21,32 @@
           </mat-radio-button>
           <mat-radio-button 
             value="enviar"
-            (change)="onEntrega(false)"> Enviar
+            (change)="onEntrega(true)" checked> Enviar
           </mat-radio-button>
         </mat-radio-group>
-        <mat-form-field class="form__element">
-            <input 
-            matInput
-            placeholder="Direccion"
-            [(ngModel)]="model.shippingAddress"
-            name="shippingAddress"
-            #shippingAddress="ngModel"
-            >
-        </mat-form-field>
-        <mat-form-field class="form__element">
-            <input 
-            matInput
-            placeholder="Ciudad"
-            [(ngModel)]="model.city"
-            name="city"
-            #city="ngModel"
-            >
-        </mat-form-field>
-       
-        <mat-form-field class="form__element">
+
+        <ng-container *ngIf="isEntrega; else showStores">
+            <mat-form-field class="form__element">
+                <input 
+                matInput
+                placeholder="Direccion"
+                [(ngModel)]="model.shippingAddress"
+                name="shippingAddress"
+                #shippingAddress="ngModel"
+                >
+            </mat-form-field>
+            <mat-form-field class="form__element">
+                <input 
+                matInput
+                placeholder="Ciudad"
+                [(ngModel)]="model.city"
+                name="city"
+                #city="ngModel"
+                >
+            </mat-form-field>
+        </ng-container>
+        <ng-template #showStores>
+             <mat-form-field class="form__element">
             <mat-label>Seleccione una opcion</mat-label>
            <mat-select 
                 name="store"
@@ -54,11 +57,15 @@
             </mat-option>
            </mat-select>
         </mat-form-field>
+        </ng-template>
+        
+       
     
     </form>
 </div>
 <app-detail></app-detail>
 <div class="actions">
-    <button [disabled]="" mat-raised-button color="primary"
-    type="submit">Comprar</button>
+    <button [disabled]="!checkoutForm.form.valid" mat-raised-button color="primary"
+    type="submit"
+    (click)="onSubmit(checkoutForm)">Comprar</button>
 </div>

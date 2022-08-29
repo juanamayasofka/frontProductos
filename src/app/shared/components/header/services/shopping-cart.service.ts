@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Product } from "src/app/pages/products/interface/product.interface";
 
 
@@ -10,9 +10,9 @@ import { Product } from "src/app/pages/products/interface/product.interface";
 export class ShoppingCartService{
     products: Product[]=[];
 
-    private carSubject = new Subject<Product[]>();
-    private totalSubjet = new Subject<number>();
-    private quantitySubjet = new Subject<number>();
+    private carSubject = new BehaviorSubject<Product[]>([]);
+    private totalSubjet = new BehaviorSubject<number>(0);
+    private quantitySubjet = new BehaviorSubject<number>(0);
 
     get totalAction$(): Observable<number> {
         return this.totalSubjet.asObservable();
@@ -39,17 +39,32 @@ export class ShoppingCartService{
      * en el observable.
      */
     private calcularTotal(): void {
-        const total = this.products.reduce((acc, prod) => acc += prod.price, 0);
+        const total = this.products.reduce((acc, prod) => acc += (prod.price * prod.quantity), 0);
         this.totalSubjet.next(total);
     }
 
     private quantityProducts(): void {
-        const quantity = this.products.length;
+        const quantity = this.products.reduce((acc, prod) => acc += prod.quantity,0);
         this.quantitySubjet.next(quantity);
     }
 
     private addToCar(product: Product): void {
-        this.products.push(product);
+        const isProductInCart = this.products.find(({id})=> id=== product.id);
+
+        if(isProductInCart){
+            isProductInCart.quantity +=1;
+        }else {
+            this.products.push({ ...product, quantity: 1})
+        }
+       
         this.carSubject.next(this.products);
+    }
+
+
+    resetCart(): void {
+        this.carSubject.next([]);
+        this.totalSubjet.next(0);
+        this.quantitySubjet.next(0);
+        this.products = [];
     }
 }

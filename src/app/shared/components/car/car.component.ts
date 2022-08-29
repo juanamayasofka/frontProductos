@@ -6,7 +6,7 @@ import { ShoppingCartService } from '../header/services/shopping-cart.service';
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css']
 })
-export class CarComponent implements OnInit {
+export class CarComponent  {
 
 
   quantity$ = this.shoppingSvc.quantityAction$;
@@ -14,7 +14,6 @@ export class CarComponent implements OnInit {
 
   constructor(private shoppingSvc: ShoppingCartService){}
 
-  ngOnInit(): void {
-  }
+ 
 
 }
